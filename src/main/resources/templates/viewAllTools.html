@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Tool Library</title>
 	<!--*************************************************
  		* author: 	
  		* course:	CIS 171 Java II
@@ -13,6 +13,17 @@
  		************************************************-->
 </head>
 <body>
-
+<form>
+<table>
+<tr th:each="currentTool : ${tool}" >
+<td th:text="${currentTool.id}" />
+<td th:text="${currentTool.name}" />
+<td th:text="${currentTool.type}" />
+<td th:text="${currentTool.isAvailable}" />
+<td><a th:href="@{/borrow/{id}(id=${currentTool.id})}">Borrow</a></td>
+</tr>
+</table>
+</form>
+<a href="../index">Go back to Home</a>
 </body>
 </html>
