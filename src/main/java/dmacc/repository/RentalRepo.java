@@ -9,6 +9,10 @@
 
 package dmacc.repository;
 
-public interface RentalRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import dmacc.beans.Rental;
+
+public interface RentalRepo extends JpaRepository<Rental, Long>{
 
 }
