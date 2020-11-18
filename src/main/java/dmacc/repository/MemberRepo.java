@@ -9,6 +9,10 @@
 
 package dmacc.repository;
 
-public interface MemberRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import dmacc.beans.Member;
+
+public interface MemberRepo extends JpaRepository<Member,Long>{
 
 }

@@ -9,6 +9,10 @@
 
 package dmacc.repository;
 
-public interface ToolRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import dmacc.beans.Tool;
+
+public interface ToolRepo extends JpaRepository<Tool, Long>{
 
 }
