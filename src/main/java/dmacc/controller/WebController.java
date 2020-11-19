@@ -29,7 +29,8 @@ public class WebController {
 	RentalRepo rentalRepo;
 	@Autowired
 	ToolRepo toolRepo;
-	@GetMapping({ "/", "viewAllTools" })
+	
+	@GetMapping({"/", "viewAllTools" })
 	public String viewAllTools(Model model) {		
 		model.addAttribute("tool", toolRepo.findAll());
 		return "viewAllTools";
