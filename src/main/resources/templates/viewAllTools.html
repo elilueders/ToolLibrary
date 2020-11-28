@@ -22,7 +22,11 @@
 			<td th:text="${currentTool.toolId}" />
 			<td th:text="${currentTool.name}" />
 			<td th:text="${currentTool.type}" />
-	   <!-- <td th:text="${currentTool.isAvailable}" />  NOTE data type boolean is causing an error-->
+	   <!-- added by Eli with assist by Brogan: thymeleaf dropped the is on isAvailable-->
+	   		<td>
+				<span th:if="${currentTool.Available}">Available</span>
+  				<span th:unless="${currentTool.Available}">Checked Out</span>
+			</td>
 	  		<td><a th:href="@{/borrow/{id}(id=${currentTool.toolId})}">Borrow</a></td>
 			</tr>
 		</table>
