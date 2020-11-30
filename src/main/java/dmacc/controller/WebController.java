@@ -15,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import dmacc.beans.Member;
 import dmacc.beans.Tool;
+import dmacc.beans.UserSignInLog;
 import dmacc.repository.MemberRepo;
 import dmacc.repository.RentalRepo;
 import dmacc.repository.ToolRepo;
@@ -48,9 +50,16 @@ public class WebController {
 	
 	// Brogan - add methods for view my tools page
 	@GetMapping({"/viewMyTools" })
-	public String viewMyTools(Model model) {		
-		model.addAttribute("rental", rentalRepo.findAll());
+	public String viewMyTools(Model model) {	
+		UserSignInLog newestTimeStamp;
+		Member m;
+		
+		newestTimeStamp = userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc();
+		m = newestTimeStamp.getMemberId();
+		
+		
 		model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
+		model.addAttribute("rental", rentalRepo.findByMemberId(m));
 		return "viewMyTools";
 	}
 	

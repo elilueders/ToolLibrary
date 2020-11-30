@@ -17,4 +17,6 @@ import dmacc.beans.UserSignInLog;
 
 public interface UserSignInLogRepo extends JpaRepository<UserSignInLog, Long>{
 	UserSignInLog findFirstByOrderByCurrentTimeStampDesc();
+	
+	
 }
