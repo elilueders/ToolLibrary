@@ -16,6 +16,11 @@
 	<link rel="stylesheet" href="../style.css" type ="text/css" >
 </head>
 <body>
+
+
+<h4 class="logged_in_as_display_area">Logged in as: <span th:text="${userSignInLog.memberId.username}"></span> </h4>
+<h6 class="logged_in_as_display_area">Hello, <span th:text="${userSignInLog.memberId.first}"></span></h6>
+ 
 <h1>Find a tool to barrow</h1>
 	<form>
 		<table class="table">

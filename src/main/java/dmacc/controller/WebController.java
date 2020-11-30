@@ -19,6 +19,7 @@ import dmacc.beans.Tool;
 import dmacc.repository.MemberRepo;
 import dmacc.repository.RentalRepo;
 import dmacc.repository.ToolRepo;
+import dmacc.repository.UserSignInLogRepo;
 
 @Controller
 public class WebController {
@@ -29,10 +30,13 @@ public class WebController {
 	RentalRepo rentalRepo;
 	@Autowired
 	ToolRepo toolRepo;
+	@Autowired
+	UserSignInLogRepo userSignInLogRepo;
 	
 	@GetMapping({"/", "viewAllTools" })
 	public String viewAllTools(Model model) {		
 		model.addAttribute("tool", toolRepo.findAll());
+		model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
 		return "viewAllTools";
 	}
 	
@@ -46,6 +50,7 @@ public class WebController {
 	@GetMapping({"/viewMyTools" })
 	public String viewMyTools(Model model) {		
 		model.addAttribute("rental", rentalRepo.findAll());
+		model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
 		return "viewMyTools";
 	}
 	

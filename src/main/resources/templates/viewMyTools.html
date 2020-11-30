@@ -17,6 +17,11 @@
 </head>
 <body>
 <!--Brogan - added the form and features for this page  -->
+
+
+<h4 class="logged_in_as_display_area">Logged in as: <span th:text="${userSignInLog.memberId.username}"></span> </h4>
+<h6 class="logged_in_as_display_area">Hello, <span th:text="${userSignInLog.memberId.first}"></span></h6>
+ 
 <h1>My tool Borrowing History</h1>
 <form>
 		<table class="table">
@@ -30,9 +35,7 @@
 		    </tr>
 		</thead>
   		<tbody>
-  
- <!-- This is currently just a basic form that returns info from the rental table for all entries. I still need to make it only get the info for the person who is logged in only. I also need to add a button for returning  -->
- 
+
 			<tr th:each="currentRental : ${rental}" >
 			<td th:text="${currentRental.rentalId}" />
 			<td th:text="${currentRental.toolId.name}" /> 
