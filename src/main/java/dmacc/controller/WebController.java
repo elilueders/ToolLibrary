@@ -41,4 +41,12 @@ public class WebController {
 		toolRepo.save(t);
 		return viewAllTools(model);
 	}
+	
+	// Brogan - add methods for view my tools page
+	@GetMapping({"/viewMyTools" })
+	public String viewMyTools(Model model) {		
+		model.addAttribute("rental", rentalRepo.findAll());
+		return "viewMyTools";
+	}
+	
 }

@@ -16,6 +16,39 @@
 	<link rel="stylesheet" href="../style.css" type ="text/css" >
 </head>
 <body>
+<!--Brogan - added the form and features for this page  -->
+<h1>My tool Borrowing History</h1>
+<form>
+		<table class="table">
+		<thead>
+			<tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Tool</th>
+		      <th scope="col">Serial No. on Tool</th>
+		      <th scope="col">Rental Start Date</th>
+		      <th scope="col">Tool Return Date</th>
+		    </tr>
+		</thead>
+  		<tbody>
+  
+ <!-- This is currently just a basic form that returns info from the rental table for all entries. I still need to make it only get the info for the person who is logged in only. I also need to add a button for returning  -->
+ 
+			<tr th:each="currentRental : ${rental}" >
+			<td th:text="${currentRental.rentalId}" />
+			<td th:text="${currentRental.toolId.name}" /> 
+			<td th:text="${currentRental.toolId.serial}" /> 
+			<td th:text="${#dates.format(currentRental.checkedOut, 'MMM dd,yyyy')} "/> <!-- for some reason when a date prints out for checked out and checked, it gets the day before the date entered into the database -->
+			<td th:text="${#dates.format(currentRental.checkedIN, 'MMM dd,yyyy')}" /> 
+			
+			</tr>
+		</tbody>
+		</table>
+	</form>
+	<a href="/">Go back to Home</a> <br>
+	<a href="/">Check out a new tool</a>
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
