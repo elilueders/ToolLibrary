@@ -16,6 +16,12 @@
 	<link rel="stylesheet" href="../style.css" type ="text/css" >
 </head>
 <body>
+	<!-- UPDATE: 12/01/2020 by Ben Miner
+		 Search Form -->
+	<form action="/search" method="post">
+		<label>Search</label><input type="text" name="keyword" id="keyword" th:value="${keyword}">
+		<button type="submit">Search</button>
+	</form>
 	<form>
 		<table>
 			<tr th:each="currentTool : ${tool}" >

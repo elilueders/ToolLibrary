@@ -10,6 +10,7 @@
 package dmacc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,24 @@ public class WebController {
 		model.addAttribute("tool", toolRepo.findAll());
 		return "viewAllTools";
 	}
-	
+	/**
+	 * process search form from viewAllTools UPDATED: 12/01/2020 by Ben Miner
+	 * @param keyword
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/search")
+	public String viewAllTools(@Param("keyword") String keyword,Model model) {
+		model.addAttribute("tool", toolRepo.keywordSearch(keyword));
+		return "viewAllTools";
+	}
+	/**
+	 * process login information UPDATED: 11/30/2020 by Ben Miner
+	 * @param username
+	 * @param password
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/login")
 	public String login(@RequestParam(name="username") String username, @RequestParam(name="password") String password, Model model) {
 		if(memberRepo.memberExist(username, password)) {
