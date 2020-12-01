@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import dmacc.beans.Member;
 import dmacc.beans.Tool;
 import dmacc.repository.MemberRepo;
 import dmacc.repository.RentalRepo;
@@ -30,10 +32,22 @@ public class WebController {
 	@Autowired
 	ToolRepo toolRepo;
 	
-	@GetMapping({"/", "viewAllTools" })
+	@GetMapping("viewAllTools")
 	public String viewAllTools(Model model) {		
 		model.addAttribute("tool", toolRepo.findAll());
 		return "viewAllTools";
+	}
+	
+	@PostMapping("/login")
+	public String login(@RequestParam(name="username") String username, @RequestParam(name="password") String password, Model model) {
+		if(memberRepo.memberExist(username, password)) {
+			Member m = memberRepo.findByusernameAndPassword(username, password);
+			model.addAttribute("memberInfo", m);
+			return "login";
+		}
+		else {
+			return "signUp";
+		}
 	}
 	
 	@PostMapping("/borrow/{id}")
