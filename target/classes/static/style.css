@@ -1,0 +1,10 @@
+body{
+	margin:3%;
+}
+h1{
+	text-align:center;
+}
+
+.logged_in_as_display_area{
+	text-align:right;
+}
