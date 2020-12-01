@@ -36,36 +36,45 @@ public class WebController {
 	ToolRepo toolRepo;
 	@Autowired
 	UserSignInLogRepo userSignInLogRepo;
+	// global Member instance
+	Member current = new Member();
 	
 	@GetMapping("viewAllTools")
 	public String viewAllTools(Model model) {		
 		model.addAttribute("tool", toolRepo.findAll());
-		model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
+		model.addAttribute("memberInfo", current);
+		//model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
 		return "viewAllTools";
 	}
 	/**
-	 * process search form from viewAllTools UPDATED: 12/01/2020 by Ben Miner
+	 * "search" process search form from viewAllTools 
+	 * UPDATED: 12/01/2020 by Ben Miner
 	 * @param keyword
 	 * @param model
-	 * @return
+	 * @return to viewAllTools
 	 */
 	@PostMapping("/search")
-	public String viewAllTools(@Param("keyword") String keyword,Model model) {
+	public String viewAllTools(@Param("keyword") String keyword, Model model) {
 		model.addAttribute("tool", toolRepo.keywordSearch(keyword));
+		model.addAttribute("memberInfo", current);
 		return "viewAllTools";
 	}
 	/**
-	 * process login information UPDATED: 11/30/2020 by Ben Miner
+	 * "login" process login information 
+	 * UPDATED: 11/30/2020 by Ben Miner
 	 * @param username
 	 * @param password
 	 * @param model
-	 * @return
+	 * @return to login or signUp
 	 */
 	@PostMapping("/login")
 	public String login(@RequestParam(name="username") String username, @RequestParam(name="password") String password, Model model) {
 		if(memberRepo.memberExist(username, password)) {
-			Member m = memberRepo.findByusernameAndPassword(username, password);
-			model.addAttribute("memberInfo", m);
+			current = memberRepo.findByusernameAndPassword(username, password);
+			UserSignInLog u = new UserSignInLog();
+			u.setMemberId(current);
+			userSignInLogRepo.save(u);
+			model.addAttribute("memberInfo", current);
 			return "login";
 		}
 		else {
@@ -80,18 +89,25 @@ public class WebController {
 	}
 	
 	// Brogan - add methods for view my tools page
+	/**
+	 * "viewMyTools" view tools member has checked out
+	 * UPDATED: 11/30/2020 by Brogan
+	 * @param model
+	 * @return viewMyTools.html
+	 */
 	@GetMapping({"/viewMyTools" })
 	public String viewMyTools(Model model) {	
+		/*
 		UserSignInLog newestTimeStamp;
 		Member m;
-		
 		newestTimeStamp = userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc();
 		m = newestTimeStamp.getMemberId();
-		
-		
-		model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
-		model.addAttribute("rental", rentalRepo.findByMemberId(m));
+		*/
+		// Update: = 12/01/2020 by Ben Miner - change model attribute to current member
+		model.addAttribute("memberInfo", current);
+		model.addAttribute("rental", rentalRepo.findByMemberId(current));
 		return "viewMyTools";
 	}
+	
 	
 }
