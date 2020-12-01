@@ -18,10 +18,19 @@
 <body>
 
 
+
 <h4 class="logged_in_as_display_area">Logged in as: <span th:text="${userSignInLog.memberId.username}"></span> </h4>
 <h6 class="logged_in_as_display_area">Hello, <span th:text="${userSignInLog.memberId.first}"></span></h6>
  
 <h1>Find a tool to barrow</h1>
+  
+	<!-- UPDATE: 12/01/2020 by Ben Miner
+		 Search Form -->
+	<form action="/search" method="post">
+		<label>Search</label><input type="text" name="keyword" id="keyword" th:value="${keyword}">
+		<button type="submit">Search</button>
+	</form>
+
 	<form>
 		<table class="table">
 			<thead>
@@ -38,7 +47,7 @@
 			<td th:text="${currentTool.toolId}" />
 			<td th:text="${currentTool.name}" />
 			<td th:text="${currentTool.type}" />
-	   <!-- added by Eli with assist by Brogan: thymeleaf dropped the is on isAvailable-->
+	   <!-- added by Eli with assist by Brogan: thymeleaf dropped the is on isAvailableœ-->
 	   		<td>
 				<span th:if="${currentTool.Available}">Available</span>
   				<span th:unless="${currentTool.Available}">Checked Out</span>

@@ -10,10 +10,12 @@
 package dmacc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import dmacc.beans.Member;
 import dmacc.beans.Tool;
@@ -35,11 +37,40 @@ public class WebController {
 	@Autowired
 	UserSignInLogRepo userSignInLogRepo;
 	
-	@GetMapping({"/", "viewAllTools" })
+	@GetMapping("viewAllTools")
 	public String viewAllTools(Model model) {		
 		model.addAttribute("tool", toolRepo.findAll());
 		model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
 		return "viewAllTools";
+	}
+	/**
+	 * process search form from viewAllTools UPDATED: 12/01/2020 by Ben Miner
+	 * @param keyword
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/search")
+	public String viewAllTools(@Param("keyword") String keyword,Model model) {
+		model.addAttribute("tool", toolRepo.keywordSearch(keyword));
+		return "viewAllTools";
+	}
+	/**
+	 * process login information UPDATED: 11/30/2020 by Ben Miner
+	 * @param username
+	 * @param password
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/login")
+	public String login(@RequestParam(name="username") String username, @RequestParam(name="password") String password, Model model) {
+		if(memberRepo.memberExist(username, password)) {
+			Member m = memberRepo.findByusernameAndPassword(username, password);
+			model.addAttribute("memberInfo", m);
+			return "login";
+		}
+		else {
+			return "signUp";
+		}
 	}
 	
 	@PostMapping("/borrow/{id}")
