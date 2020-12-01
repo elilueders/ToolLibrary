@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import dmacc.beans.Member;
 import dmacc.beans.Tool;
+import dmacc.beans.UserSignInLog;
 import dmacc.repository.MemberRepo;
 import dmacc.repository.RentalRepo;
 import dmacc.repository.ToolRepo;
+import dmacc.repository.UserSignInLogRepo;
 
 @Controller
 public class WebController {
@@ -32,10 +34,13 @@ public class WebController {
 	RentalRepo rentalRepo;
 	@Autowired
 	ToolRepo toolRepo;
+	@Autowired
+	UserSignInLogRepo userSignInLogRepo;
 	
 	@GetMapping("viewAllTools")
 	public String viewAllTools(Model model) {		
 		model.addAttribute("tool", toolRepo.findAll());
+		model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
 		return "viewAllTools";
 	}
 	/**
@@ -73,4 +78,20 @@ public class WebController {
 		toolRepo.save(t);
 		return viewAllTools(model);
 	}
+	
+	// Brogan - add methods for view my tools page
+	@GetMapping({"/viewMyTools" })
+	public String viewMyTools(Model model) {	
+		UserSignInLog newestTimeStamp;
+		Member m;
+		
+		newestTimeStamp = userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc();
+		m = newestTimeStamp.getMemberId();
+		
+		
+		model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
+		model.addAttribute("rental", rentalRepo.findByMemberId(m));
+		return "viewMyTools";
+	}
+	
 }
