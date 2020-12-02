@@ -1,23 +1,20 @@
 /*************************************************
- * author: 	
+ * author: 	Brogan
  * course:	CIS 171 Java II
- * date:	
+ * date:	11/30/2020
  * project:	ToolLibrary - group project
- * file:	RentalRepo.java
+ * file:	UserSignInLogRepo.java
  * summary:	
  ************************************************/
 
 package dmacc.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import dmacc.beans.Rental;
-import dmacc.beans.Member;
+import dmacc.beans.UserSignInLog;
 
-public interface RentalRepo extends JpaRepository<Rental, Long>{
+public interface UserSignInLogRepo extends JpaRepository<UserSignInLog, Long>{
+	UserSignInLog findFirstByOrderByCurrentTimeStampDesc();
 	
-	List<Rental>findByMemberId(Member m);
-
+	
 }
