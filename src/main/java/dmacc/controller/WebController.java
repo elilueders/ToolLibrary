@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import dmacc.beans.Member;
 import dmacc.beans.Rental;
 import dmacc.beans.Tool;
@@ -117,7 +120,8 @@ public class WebController {
 	public String returnTool(Tool t, Member m, Model model) {
 		t.setAvailable(true);
 		rent = rentalRepo.findByuseridAndtoolid(m, t);
-		rent.setCheckedIN();
+		java.util.Date date=new java.util.Date();
+		rent.setCheckedIN(date);
 		return viewMyTools(model);
 	}
 	
