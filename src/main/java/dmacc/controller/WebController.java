@@ -10,6 +10,7 @@
 package dmacc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dmacc.beans.Member;
+import dmacc.beans.Rental;
 import dmacc.beans.Tool;
 import dmacc.beans.UserSignInLog;
 import dmacc.repository.MemberRepo;
@@ -38,6 +40,7 @@ public class WebController {
 	UserSignInLogRepo userSignInLogRepo;
 	// global Member instance
 	Member current = new Member();
+	Rental rent = new Rental();
 	
 	@GetMapping("viewAllTools")
 	public String viewAllTools(Model model) {		
@@ -113,7 +116,8 @@ public class WebController {
 	@PostMapping("/return/{id, member}")
 	public String returnTool(Tool t, Member m, Model model) {
 		t.setAvailable(true);
-		
+		rent = rentalRepo.findByuseridAndtoolid(m, t);
+		rent.setCheckedIN();
 		return viewMyTools(model);
 	}
 	
