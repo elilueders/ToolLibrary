@@ -109,5 +109,13 @@ public class WebController {
 		return "viewMyTools";
 	}
 	
+	//Added by Chadwick for return feature on viewMytools
+	@PostMapping("/return/{id, member}")
+	public String returnTool(Tool t, Member m, Model model) {
+		t.setAvailable(true);
+		
+		return viewMyTools(model);
+	}
+	
 	
 }

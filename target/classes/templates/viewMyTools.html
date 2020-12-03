@@ -42,7 +42,8 @@
 			<td th:text="${currentRental.toolId.serial}" /> 
 			<td th:text="${#dates.format(currentRental.checkedOut, 'MMM dd,yyyy')} "/> <!-- for some reason when a date prints out for checked out and checked, it gets the day before the date entered into the database -->
 			<td th:text="${#dates.format(currentRental.checkedIN, 'MMM dd,yyyy')}" /> 
-			
+			<!-- Chadwick - added return tool feature -->
+			<td><a th:href="@{/return/{id, member}(id=${currentTool.toolId}, member=${memberInfo.username})}">Return</a></td>
 			</tr>
 		</tbody>
 		</table>
