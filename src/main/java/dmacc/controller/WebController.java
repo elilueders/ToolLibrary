@@ -10,15 +10,14 @@
 package dmacc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import dmacc.beans.Member;
@@ -88,10 +87,22 @@ public class WebController {
 		}
 	}
 	
-	@PostMapping("/borrow/{id}")
-	public String reviseTool(Tool t, Model model) {
-		toolRepo.save(t);
-		return viewAllTools(model);
+	@GetMapping("/borrow/{id}/{member}")
+	public String reviseTool(@PathVariable("id")long tId, @PathVariable("member")long mId, Model model) {
+		Tool t = toolRepo.findById(tId).orElse(null);
+		Member m = memberRepo.findById(mId).orElse(null);
+		if(m == null) {
+			return "signUp";
+		} else {
+			rent = new Rental();
+			rent.setToolId(t);
+			rent.setMemberId(m);
+			rent.setCheckedOut(new Date());
+			t.setAvailable(false);
+			rentalRepo.save(rent);
+			toolRepo.save(t);
+			return viewAllTools(model);
+		}
 	}
 	
 	// Brogan - add methods for view my tools page
@@ -116,12 +127,14 @@ public class WebController {
 	}
 	
 	//Added by Chadwick for return feature on viewMytools
-	@PostMapping("/return/{id, member}")
-	public String returnTool(Tool t, Member m, Model model) {
+	@GetMapping("/return/{id}")
+	public String returnTool(@PathVariable("id")long rId, Model model) {
+		Rental r = rentalRepo.findById(rId).orElse(null);
+		Tool t = toolRepo.findById(r.getToolId().getToolId()).orElse(null);
 		t.setAvailable(true);
-		rent = rentalRepo.findByuseridAndtoolid(m, t);
-		java.util.Date date=new java.util.Date();
-		rent.setCheckedIN(date);
+		r.setCheckedIN(new Date());
+		toolRepo.save(t);
+		rentalRepo.save(r);
 		return viewMyTools(model);
 	}
 	

@@ -24,7 +24,7 @@ public interface RentalRepo extends JpaRepository<Rental, Long>{
 	List<Rental>findByMemberId(Member m);
 	
 	//Added by Chadwick for return tool function on viewMyTools
-	@Query("select r from Rental r where r.memberId= :memberInput and r.tool= :toolInput")
+	@Query("select r from Rental r where r.memberId= :memberInput and r.toolId= :toolInput")
 	Rental findByuseridAndtoolid(@Param("memberInput")Member memberId, @Param("toolInput")Tool toolId);
 
 }
