@@ -14,6 +14,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -136,6 +137,30 @@ public class WebController {
 		toolRepo.save(t);
 		rentalRepo.save(r);
 		return viewMyTools(model);
+	}
+	
+	//Added by Eli for new member sign up
+	@PostMapping("/signUp")
+	public String signUp(@RequestParam(name="first") String first, @RequestParam(name="last") String last, @RequestParam(name="address") String address, @RequestParam(name="phone") String phone, @RequestParam(name="username") String username, @RequestParam(name="password") String password, Model model) {
+		Member m = new Member();
+		m.setFirst(first);
+		m.setLast(last);
+		m.setAddress(address);
+		m.setPhone(phone);
+		m.setUsername(username);
+		m.setPassword(password);
+		memberRepo.save(m);
+		current = memberRepo.findByusernameAndPassword(username, password);
+		UserSignInLog u = new UserSignInLog();
+		u.setMemberId(current);
+		userSignInLogRepo.save(u);
+		model.addAttribute("memberInfo", current);
+		return "login";
+	}
+	
+	@GetMapping("/signUp")
+	public String signUp(Model model) {
+		return "signUp";
 	}
 	
 	
