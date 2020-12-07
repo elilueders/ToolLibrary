@@ -18,10 +18,10 @@
 <body>
 
 
+<span th:hidden="${memberInfo.memberId}"></span>
+<h4 class="logged_in_as_display_area">Logged in as: <span th:text="${memberInfo.username}"></span> </h4>
+<h6 class="logged_in_as_display_area">Hello, <span th:text="${memberInfo.first}"></span></h6>
 
-<h4 class="logged_in_as_display_area">Logged in as: <span th:text="${userSignInLog.memberId.username}"></span> </h4>
-<h6 class="logged_in_as_display_area">Hello, <span th:text="${userSignInLog.memberId.first}"></span></h6>
- 
 <h1>Find a tool to barrow</h1>
   
 	<!-- UPDATE: 12/01/2020 by Ben Miner
@@ -52,7 +52,7 @@
 				<span th:if="${currentTool.Available}">Available</span>
   				<span th:unless="${currentTool.Available}">Checked Out</span>
 			</td>
-	  		<td><a th:href="@{/borrow/{id}(id=${currentTool.toolId})}">Borrow</a></td> <!--this will create new entry in rental table from the member who is logged in and the tool they selected  -->
+	  		<td><a th:href="@{/borrow/{id}/{member}(id=${currentTool.toolId}, member=${memberInfo.memberId})}">Borrow</a></td> <!--this will create new entry in rental table from the member who is logged in and the tool they selected  -->
 			</tr>
 			</tbody>
 		</table>
