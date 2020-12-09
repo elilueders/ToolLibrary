@@ -52,7 +52,8 @@
 				<span th:if="${currentTool.Available}">Available</span>
   				<span th:unless="${currentTool.Available}">Checked Out</span>
 			</td>
-	  		<td><a th:href="@{/borrow/{id}/{member}(id=${currentTool.toolId}, member=${memberInfo.memberId})}">Borrow</a></td> <!--this will create new entry in rental table from the member who is logged in and the tool they selected  -->
+			<!-- Eli - added if statement to borrow button so only displays when available -->
+	  		<td><span th:if="${currentTool.Available}"><a th:href="@{/borrow/{id}/{member}(id=${currentTool.toolId}, member=${memberInfo.memberId})}">Borrow</a></span></td> <!--this will create new entry in rental table from the member who is logged in and the tool they selected  -->
 			</tr>
 			</tbody>
 		</table>

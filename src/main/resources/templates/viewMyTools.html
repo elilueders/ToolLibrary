@@ -41,9 +41,16 @@
 			<td th:text="${currentRental.toolId.name}" /> 
 			<td th:text="${currentRental.toolId.serial}" /> 
 			<td th:text="${#dates.format(currentRental.checkedOut, 'MMM dd,yyyy')} "/> <!-- for some reason when a date prints out for checked out and checked, it gets the day before the date entered into the database -->
-			<td th:text="${#dates.format(currentRental.checkedIN, 'MMM dd,yyyy')}" /> 
+			<!-- Eli - added if/else to only display return button (added by Chadwick) when its still checked out -->
+			<td>
+				<span th:if="${currentRental.checkedIN}" th:text="${#dates.format(currentRental.checkedIN, 'MMM dd,yyyy')}"></span>
+  				<span th:unless="${currentRental.checkedIN}" ><a th:href="@{/return/{id}(id=${currentRental.rentalId})}">Return</a></span>
+			</td>
+			<!-- Eli - commented these out because they are in if/else statement above 
+				should probably clean this up if you guys like this feature-->
+			<!-- <td th:text="${#dates.format(currentRental.checkedIN, 'MMM dd,yyyy')}" /> --> 
 			<!-- Chadwick - added return tool feature -->
-			<td><a th:href="@{/return/{id}(id=${currentRental.rentalId})}">Return</a></td>
+			<!-- <td><a th:href="@{/return/{id}(id=${currentRental.rentalId})}">Return</a></td> -->
 			</tr>
 		</tbody>
 		</table>
