@@ -13,8 +13,10 @@
  		************************************************-->
  		
  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 	<link rel="stylesheet" href="../style.css" type ="text/css" >
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 </head>
 <body>
@@ -22,22 +24,29 @@
 	
 	<!-- signUp form added by Eli Lueders 3 Dec 2020 -->
 	<form action="/signUp" method="post" autocomplete="off">
-		<label>First Name</label><input type="text" name="first"></br>
-		<label>Last Name</label><input type="text" name="last"></br>
-		<label>Address</label><input type="text" name="address"></br>
-		<label>Phone Number</label><input type="text" name="phone"></br>
-		<label>Create User Name</label><input type="text" name="username"></br>
-		<label>Create Password</label><input type="text" name="password"></br>
+		<label>First Name</label><input type="text" name="first">
+		<label>Last Name</label><input type="text" name="last"
+		<br/>
+		<label>Address</label><input type="text" name="address">
+		<label>Phone Number</label><input type="text" name="phone">
+		<br/>
+		<label>Create User Name</label><input type="text" name="username">
+		<label>Create Password</label><input type="text" name="password">
+		<br/>
 		<!--radio buttons added by Brogan  -->
-		Select your membership type: <br>
-		<input type="radio" id="basic" name="basic" value="basic">
+		<!-- Eli - change name attributes to 'level' so you can only select one
+			and wrapped form in div for css styling -->
+		<label>Select your membership type:</label>
+		<div class="radio">
+		<input type="radio" id="basic" name="level" value="basic">
 		<label for="basic">basic</label>
-		<input type="radio" id="silver" name="silver" value="silver">
+		<input type="radio" id="silver" name="level" value="silver">
 		<label for="silver">silver</label>
-		<input type="radio" id="gold" name="gold" value="gold">
+		<input type="radio" id="gold" name="level" value="gold">
 		<label for="gold">basic</label>
-		<input type="radio" id="premium" name="premium" value="premium">
+		<input type="radio" id="premium" name="level" value="premium">
 		<label for="premium">premium</label><br>
+		</div>
 		<button type="submit">Sign Up</button><button type="reset">Clear Form</button>
 	</form>
 	
