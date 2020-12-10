@@ -21,7 +21,7 @@
 
 <h4 class="logged_in_as_display_area">Logged in as: <span th:text="${memberInfo.username}"></span> </h4>
 <h6 class="logged_in_as_display_area">Hello, <span th:text="${memberInfo.first}"></span></h6>
-<a href="/logOut">Sign Out</a>
+<a  class="logged_in_as_display_area" href="/logOut">Sign Out</a>
  
 <h1>My tool Borrowing History</h1>
 <form>
@@ -47,11 +47,6 @@
 				<span th:if="${currentRental.checkedIN}" th:text="${#dates.format(currentRental.checkedIN, 'MMM dd,yyyy')}"></span>
   				<span th:unless="${currentRental.checkedIN}" ><a th:href="@{/return/{id}(id=${currentRental.rentalId})}">Return</a></span>
 			</td>
-			<!-- Eli - commented these out because they are in if/else statement above 
-				should probably clean this up if you guys like this feature-->
-			<!-- <td th:text="${#dates.format(currentRental.checkedIN, 'MMM dd,yyyy')}" /> --> 
-			<!-- Chadwick - added return tool feature -->
-			<!-- <td><a th:href="@{/return/{id}(id=${currentRental.rentalId})}">Return</a></td> -->
 			</tr>
 		</tbody>
 		</table>
