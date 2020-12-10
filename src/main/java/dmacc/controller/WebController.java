@@ -14,7 +14,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,10 +42,9 @@ public class WebController {
 	UserSignInLogRepo userSignInLogRepo;
 	// global Member instance
 	Member current = new Member();
-	Rental rent = new Rental();
 	
 	@GetMapping("viewAllTools")
-	public String viewAllTools(Model model) {		
+	public String viewAllTools(Model model) {
 		model.addAttribute("tool", toolRepo.findAll());
 		model.addAttribute("memberInfo", current);
 		//model.addAttribute("userSignInLog", userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc());
@@ -84,7 +82,7 @@ public class WebController {
 			return "login";
 		}
 		else {
-			return "signUp";
+			return "/signUp";
 		}
 	}
 	
@@ -93,9 +91,9 @@ public class WebController {
 		Tool t = toolRepo.findById(tId).orElse(null);
 		Member m = memberRepo.findById(mId).orElse(null);
 		if(m == null) {
-			return "signUp";
+			return "/signUp";
 		} else {
-			rent = new Rental();
+			Rental rent = new Rental();
 			rent.setToolId(t);
 			rent.setMemberId(m);
 			rent.setCheckedOut(new Date());
@@ -113,21 +111,23 @@ public class WebController {
 	 * @param model
 	 * @return viewMyTools.html
 	 */
-	@GetMapping({"/viewMyTools" })
-	public String viewMyTools(Model model) {	
-		/*
-		UserSignInLog newestTimeStamp;
-		Member m;
-		newestTimeStamp = userSignInLogRepo.findFirstByOrderByCurrentTimeStampDesc();
-		m = newestTimeStamp.getMemberId();
-		*/
-		// Update: = 12/01/2020 by Ben Miner - change model attribute to current member
+	@GetMapping({"viewMyTools" })
+	public String viewMyTools(Model model) {
+		// Update: 12/01/2020 by Ben Miner - change model attribute to current member
 		model.addAttribute("memberInfo", current);
 		model.addAttribute("rental", rentalRepo.findByMemberId(current));
 		return "viewMyTools";
 	}
 	
 	//Added by Chadwick for return feature on viewMytools
+	/**
+	 * returnTool : return feature on viewMyTools
+	 * UPDATED: by Chadwick
+	 * @param rId
+	 * @param model
+	 * @return to viewMyTools
+	 */
+	// UPDATE: 12/03/2020 by Ben edits to edit @param rId and add repo save calls
 	@GetMapping("/return/{id}")
 	public String returnTool(@PathVariable("id")long rId, Model model) {
 		Rental r = rentalRepo.findById(rId).orElse(null);
@@ -163,5 +163,10 @@ public class WebController {
 		return "signUp";
 	}
 	
+	@GetMapping("/logOut")
+	public String logOut(Model model) {
+		current = new Member();
+		return "index";
+	}
 	
 }
