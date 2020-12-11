@@ -85,7 +85,17 @@ public class WebController {
 			return "/signUp";
 		}
 	}
-	
+	/**
+	 * return to login.html
+	 * UPDATE: by Ben 12/10/2020
+	 * @param model
+	 * @return login.html
+	 */
+	@GetMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("memberInfo", current);
+		return "login";
+	}
 	@GetMapping("/borrow/{id}/{member}")
 	public String reviseTool(@PathVariable("id")long tId, @PathVariable("member")long mId, Model model) {
 		Tool t = toolRepo.findById(tId).orElse(null);
@@ -157,9 +167,27 @@ public class WebController {
 		model.addAttribute("memberInfo", current);
 		return "login";
 	}
-	
+	@GetMapping("/edit")
+	public String editMember(Model model) {
+		model.addAttribute("memberInfo", current);
+		return "signUp";
+	}
+	@PostMapping("/update/{id}")
+	public String updateMember(@RequestParam(name="first") String first, @RequestParam(name="last") String last, @RequestParam(name="address") String address, @RequestParam(name="phone") String phone, @RequestParam(name="username") String username, @RequestParam(name="password") String password, Model model) {
+		current.setFirst(first);
+		current.setLast(last);
+		current.setAddress(address);
+		current.setPhone(phone);
+		current.setUsername(username);
+		current.setPassword(password);
+		memberRepo.save(current);
+		model.addAttribute("memberInfo", current);
+		return "login";
+	}
 	@GetMapping("/signUp")
 	public String signUp(Model model) {
+		Member m = new Member();
+		model.addAttribute("memberInfo", m);
 		return "signUp";
 	}
 	
