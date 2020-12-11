@@ -20,7 +20,7 @@
 </head>
 <body>
 	<div class="banner"><a href="/viewAllTools"><img src="/banner3.jpg" alt="Tool Library Logo" style="width: 90vw"></a></div>
-
+	<p style="font-size: 12px">click banner to view tool library</p>
 	<div th:if="${memberInfo.first}">
 		<h2>Edit Info for <span th:text="${memberInfo.username}"></span></h2>
 		<a href="/login">Profile</a> | <a href="/viewMyTools">My History</a> | <a href="/logOut">Sign Out</a><br />
@@ -59,7 +59,6 @@
 		<button type="submit">Sign Up</button><button type="reset">Clear Form</button>
 	</form>
 	
-	<!-- <a href="/">Go back to Home</a><br/> -->
 	
 <footer class="page-footer font-small pt-4">
   <div class="container-fluid text-center text-md-left">

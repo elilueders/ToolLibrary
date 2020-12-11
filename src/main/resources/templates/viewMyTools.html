@@ -9,7 +9,8 @@
  		* date:	
  		* project:	ToolLibrary - group project
  		* file:		viewMyTools.html
- 		* summary:	
+ 		* edit:	
+ 			Eli - moved navigation links to header 12/10/2020
  		************************************************-->
  		
  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -21,7 +22,7 @@
 
 
 	<div class="banner"><a href="/viewAllTools"><img src="/banner3.jpg" alt="Tool Library Logo" style="width: 90vw"></a></div>
-
+	<p style="font-size: 12px">click banner to view tool library</p>
 	<div class="logged_in_as_display_area" th:if="${memberInfo.username}">
 		<h4>Hello, <span th:text="${memberInfo.first}"></span>!</h4>
 		<a href="/login">Profile</a> | <a href="/viewMyTools">My History</a><br /> 
@@ -60,10 +61,6 @@
 		</tbody>
 		</table>
 	</form>
-	<!-- Eli - all these links are now in header -->
-	<!-- <a href="/">Go back to Home</a> <br>
-	<a href="/viewAllTools">Check out a new tool</a> <br>
-	<a href="/login">User Profile</a> -->
 
 <footer class="page-footer font-small pt-4">
   <div class="container-fluid text-center text-md-left">

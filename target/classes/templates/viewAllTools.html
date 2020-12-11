@@ -4,29 +4,36 @@
 	<meta charset="UTF-8">
 	<title>Tool Library</title>
 	<!--*************************************************
- 		* author: 	
  		* course:	CIS 171 Java II
  		* date:	
  		* project:	ToolLibrary - group project
  		* file:		viewAllTools.html
- 		* summary:	
+ 		* edits:	
+ 			Eli - moved navigation links to header
  		************************************************-->
  		
  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-	<link rel="stylesheet" href="../style.css" type ="text/css" >
+	<link rel="stylesheet" href="/style.css" type ="text/css" >
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
 
+	<span th:hidden="${memberInfo.memberId}"></span>
 
-<span th:hidden="${memberInfo.memberId}"></span>
-<h4 class="logged_in_as_display_area">Logged in as: <span th:text="${memberInfo.username}"></span> </h4>
-<h6 class="logged_in_as_display_area">Hello, <span th:text="${memberInfo.first}"></span></h6>
-<a  class="logged_in_as_display_area" href="/logOut">Sign Out</a>
+	<div class="banner"><a href="/viewAllTools"><img src="/banner3.jpg" alt="Tool Library Logo" style="width: 90vw"></a></div>
+	<p style="font-size: 12px">click banner to view tool library</p>
+	<div class="logged_in_as_display_area" th:if="${memberInfo.username}">
+		<h4>Hello, <span th:text="${memberInfo.first}"></span>!</h4>
+		<a href="/login">Profile</a> | <a href="/viewMyTools">My History</a><br /> 
+		<a href="/logOut">Sign Out</a><br />
+	</div>
+	<div class="logged_in_as_display_area" th:unless="${memberInfo.username}">
+		<h4><a href="/">Sign In</a></h4>
+		<p><em>Not a member yet? </em><a href="/signUp">Sign Up</a>!</p>
+	</div>
 
-<h1>Find a Tool to Barrow</h1>
+<h2>Library of Tools</h2>
   
 	<!-- UPDATE: 12/01/2020 by Ben Miner
 		 Search Form -->
@@ -64,11 +71,6 @@
 			</tbody>
 		</table>
 	</form>
-	<a href="/">Go back to Home</a> <br>
-	<span th:if="${memberInfo.username}">
-		<a href="/viewMyTools">View tool I have checked out</a><br>
-		<a href="/login">User Profile</a>
-	</span>
 	
 	
 <footer class="page-footer font-small pt-4">
@@ -97,6 +99,17 @@
           </li>
         </ul>
       </div>
+      <div class="col">
+        <h5 class="text-uppercase">Download Links</h5>
+        <ul class="list-unstyled">
+          <li>
+            <a href="../FAQ.pdf" type="application/pdf">FAQ</a>
+          </li>
+          <li>  	
+			<a href="../application.pdf" type="application/pdf">Membership Application</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="footer-copyright text-center py-3">© 2020 Copyright:
@@ -107,4 +120,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+
 </html>
