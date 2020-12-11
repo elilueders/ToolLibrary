@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Tool Library: Home</title>
+	<title>Tool Library: Sign In</title>
 	<!--*************************************************
  		* author: 	
  		* course:	CIS 171 Java II
@@ -14,22 +14,25 @@
  	
 
  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="../style.css" type ="text/css" >
+	<link rel="stylesheet" href="/style.css" type ="text/css" >
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<center><img src="../banner3.jpg" alt="Tool Library Logo" style="width:800px"><br/><br/></center>
+	<div class="banner"><a href="/viewAllTools"><img src="/banner3.jpg" alt="Tool Library Logo" style="width: 90vw"></a></div>
 	<!-- Login form updated 11/29/2020 by Ben Miner -->
 	<form action="/login" method="post">
 		<label>User Name</label><input type="text" name="username">
 		<label>Password</label><input type="password" name="password">
 		<button type="submit">submit</button>
 	</form>
+	<p><em>Not a member yet? </em><a href="/signUp">Sign Up</a>!</p>
+
 	<!--pdf files added by Chadwick Burgett source material- https://gdmhabitat.org/restore/tool/ and http://www.thetoollibrary.org/ -->
-	<a href="../FAQ.pdf" type="application/pdf">Tool Library Information and FAQ</a><br/>
-	<a href="../application.pdf" type="application/pdf">Membership Application</a><br/>
-	<a href="viewAllTools">View all Tools</a><br/>
-	<a href="/signUp">New member sign up</a>
+	<!-- Eli - moved FAQ and app to footer -->
+	<!-- <a href="../FAQ.pdf" type="application/pdf">Tool Library Information and FAQ</a><br/> -->
+	<!-- <a href="../application.pdf" type="application/pdf">Membership Application</a><br/> -->
+	<!-- Eli - header img now link to view all tools -->
+	<!-- <a href="viewAllTools">View All Tools</a><br/> -->
 
 <footer class="page-footer font-small pt-4">
   <div class="container-fluid text-center text-md-left">
@@ -54,6 +57,17 @@
           </li>
           <li>
             <a href="#" class="fa fa-twitter"></a>
+          </li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5 class="text-uppercase">Download Links</h5>
+        <ul class="list-unstyled">
+          <li>
+            <a href="../FAQ.pdf" type="application/pdf">FAQ</a>
+          </li>
+          <li>  	
+			<a href="../application.pdf" type="application/pdf">Membership Application</a>
           </li>
         </ul>
       </div>
