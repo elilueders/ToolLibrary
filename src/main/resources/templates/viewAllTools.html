@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<title>Tool Library</title>
 	<!--*************************************************
- 		* author: 	
  		* course:	CIS 171 Java II
  		* date:	
  		* project:	ToolLibrary - group project
  		* file:		viewAllTools.html
- 		* summary:	
+ 		* edits:	
+ 			Eli - moved navigation links to header
  		************************************************-->
  		
  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,7 +22,7 @@
 	<span th:hidden="${memberInfo.memberId}"></span>
 
 	<div class="banner"><a href="/viewAllTools"><img src="/banner3.jpg" alt="Tool Library Logo" style="width: 90vw"></a></div>
-
+	<p style="font-size: 12px">click banner to view tool library</p>
 	<div class="logged_in_as_display_area" th:if="${memberInfo.username}">
 		<h4>Hello, <span th:text="${memberInfo.first}"></span>!</h4>
 		<a href="/login">Profile</a> | <a href="/viewMyTools">My History</a><br /> 
@@ -71,11 +71,6 @@
 			</tbody>
 		</table>
 	</form>
-	<a href="/">Go back to Home</a> <br>
-	<span th:if="${memberInfo.username}">
-		<a href="/viewMyTools">View tool I have checked out</a><br>
-		<a href="/login">User Profile</a>
-	</span>
 	
 	
 <footer class="page-footer font-small pt-4">

@@ -1,10 +1,9 @@
 body {
-	margin: 2rem 0; display : flex;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	background-color: black;
 	color: white;
-	display: flex;
 }
 
 form {
@@ -65,7 +64,6 @@ a:hover {
 	text-decoration: none;
 }
 
-
 .logged_in_as_display_area {
 	width: 90%;
 	text-align: right;
@@ -79,10 +77,6 @@ a:hover {
 	flex-direction: row;
 	margin-bottom: -15px;
 	align-items: center;
-	justify-content: center;
-
-footer{
-	background-color:#807061;
-	width:100%;
-
+	justify-content: center; footer { background-color : #807061;
+	width: 100%;
 }
