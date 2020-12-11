@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Tool Library: My History</title>
 	<!--*************************************************
  		* author: 	
  		* course:	CIS 171 Java II
@@ -13,27 +13,35 @@
  		************************************************-->
  		
  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="../style.css" type ="text/css" >
+	<link rel="stylesheet" href="/style.css" type ="text/css" >
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <!--Brogan - added the form and features for this page  -->
 
 
-<h4 class="logged_in_as_display_area">Logged in as: <span th:text="${memberInfo.username}"></span> </h4>
-<h6 class="logged_in_as_display_area">Hello, <span th:text="${memberInfo.first}"></span></h6>
-<a  class="logged_in_as_display_area" href="/logOut">Sign Out</a>
+	<div class="banner"><a href="/viewAllTools"><img src="/banner3.jpg" alt="Tool Library Logo" style="width: 90vw"></a></div>
+
+	<div class="logged_in_as_display_area" th:if="${memberInfo.username}">
+		<h4>Hello, <span th:text="${memberInfo.first}"></span>!</h4>
+		<a href="/login">Profile</a> | <a href="/viewMyTools">My History</a><br /> 
+		<a href="/logOut">Sign Out</a><br />
+	</div>
+	<div class="logged_in_as_display_area" th:unless="${memberInfo.username}">
+		<h4><a href="/">Sign In</a></h4>
+		<p><em>Not a member yet? </em><a href="/signUp">Sign Up</a>!</p>
+	</div>
  
-<h1>My tool Borrowing History</h1>
+<h1>My History</h1>
 <form>
 		<table class="table">
 		<thead>
 			<tr>
 		      <th scope="col">#</th>
 		      <th scope="col">Tool</th>
-		      <th scope="col">Serial No. on Tool</th>
+		      <th scope="col">Serial No</th>
 		      <th scope="col">Rental Start Date</th>
-		      <th scope="col">Tool Return Date</th>
+		      <th scope="col">Return Date</th>
 		    </tr>
 		</thead>
   		<tbody>
@@ -52,9 +60,10 @@
 		</tbody>
 		</table>
 	</form>
-	<a href="/">Go back to Home</a> <br>
+	<!-- Eli - all these links are now in header -->
+	<!-- <a href="/">Go back to Home</a> <br>
 	<a href="/viewAllTools">Check out a new tool</a> <br>
-	<a href="/login">User Profile</a>
+	<a href="/login">User Profile</a> -->
 
 <footer class="page-footer font-small pt-4">
   <div class="container-fluid text-center text-md-left">
@@ -82,16 +91,26 @@
           </li>
         </ul>
       </div>
+      <div class="col">
+        <h5 class="text-uppercase">Download Links</h5>
+        <ul class="list-unstyled">
+          <li>
+            <a href="../FAQ.pdf" type="application/pdf">FAQ</a>
+          </li>
+          <li>  	
+			<a href="../application.pdf" type="application/pdf">Membership Application</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="footer-copyright text-center py-3">© 2020 Copyright:
     The Tool Library
   </div>
 </footer>
-
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+
 </html>

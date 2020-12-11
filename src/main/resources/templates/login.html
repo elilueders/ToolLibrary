@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Tool Library: Profile</title>
 	<!--*************************************************
  		* author: 	Ben Miner
  		* course:	CIS 171 Java II
@@ -13,32 +13,45 @@
  		************************************************-->
  	
  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-	<link rel="stylesheet" href="../style.css" type ="text/css" >
+	<link rel="stylesheet" href="/style.css" type ="text/css" >
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
-<span th:hidden="${memberInfo.memberId}"></span>
-	<h1>Member Info</h1>
-	<table>
-		<tr>
-			<th>User Id</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>User Name</th>
-		</tr>
-		<tr th:each="member : ${memberInfo}">
-			<td th:text="${member.memberId}"/>
-			<td th:text="${member.first}"/>
-			<td th:text="${member.last}"/>
-			<td th:text="${member.username}"/>
-		</tr>
-	</table>
-	<a href="/viewAllTools">View all Tools</a><br>
-	<a href="/viewMyTools">View my Tools</a><br>
+	<span th:hidden="${memberInfo.memberId}"></span>
+	<div class="banner"><a href="/viewAllTools"><img src="/banner3.jpg" alt="Tool Library Logo" style="width: 90vw"></a></div>
+	
+	<h2><span th:text="${memberInfo.username}"></span>'s Profile</h2>
 	<a href="/edit">Update Profile</a>
-	<a href="/logOut">Sign Out</a>
+	<a href="/viewMyTools">My History</a>  
+	<a href="/logOut">Sign Out</a><br />
+	
+	<table class="table">
+	
+  	<tbody>
+		<tr>
+			<td>Name: </td>
+			<td th:text="${memberInfo.first}+' '+${memberInfo.last} " /> 
+		</tr>
+		<tr>
+			<td>Address: </td>
+			<td th:text="${memberInfo.address} " /> 
+		</tr>
+		<tr>
+			<td>Phone: </td>
+			<td th:text="${memberInfo.phone} " /> 
+		</tr>
+		<tr>
+			<td>Username: </td>
+			<td th:text="${memberInfo.username} " /> 
+		</tr>
+		<tr>
+			<td>Password: </td>
+			<td>******** </td>
+		</tr>
+	</tbody>
+	</table>
+	
 	
 <footer class="page-footer font-small pt-4">
   <div class="container-fluid text-center text-md-left">
@@ -66,6 +79,17 @@
           </li>
         </ul>
       </div>
+      <div class="col">
+        <h5 class="text-uppercase">Download Links</h5>
+        <ul class="list-unstyled">
+          <li>
+            <a href="../FAQ.pdf" type="application/pdf">FAQ</a>
+          </li>
+          <li>  	
+			<a href="../application.pdf" type="application/pdf">Membership Application</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="footer-copyright text-center py-3">© 2020 Copyright:
@@ -76,4 +100,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+
 </html>

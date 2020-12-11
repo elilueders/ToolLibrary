@@ -82,7 +82,7 @@ public class WebController {
 			return "login";
 		}
 		else {
-			return "/signUp";
+			return signUp(model);
 		}
 	}
 	/**
@@ -101,7 +101,7 @@ public class WebController {
 		Tool t = toolRepo.findById(tId).orElse(null);
 		Member m = memberRepo.findById(mId).orElse(null);
 		if(m == null) {
-			return "/signUp";
+			return signUp(model);
 		} else {
 			Rental rent = new Rental();
 			rent.setToolId(t);
